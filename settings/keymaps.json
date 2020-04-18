@@ -1,0 +1,10 @@
+[
+    {
+        "command": "core.nextTab",
+        "keybinding": "ctrl+right"
+    },
+    {
+        "command": "core.previousTab",
+        "keybinding": "ctrl+left"
+    }
+]

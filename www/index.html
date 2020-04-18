@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" type="image/png" href="./theia.png"/>
+  <link rel="icon" type="image/png" href="./theia.png"/>
+  <script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
+  <style>
+    @font-face{
+        font-family: 'JetBrains Mono';
+        src: url('./JetBrainsMono-Regular.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    #theia-top-panel{
+        font-family: 'Helvetica' !important;
+    }
+    .scm-tab-icon {
+        -webkit-mask: url("./git.png") !important;
+        mask: url("./git.png") !important;
+    }
+    .debug-tab-icon {
+        -webkit-mask: url("./debug.png") !important;
+        mask: url("./debug.png") !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div ></div>
+  <script>
+    function afterStartToggle() {
+        try {
+            toggleMenuBar();
+            setTimeout(() => { afterStartTerm(); }, 1000);
+        } catch(error) {
+            setTimeout(() => { afterStartToggle(); }, 1000);
+        };
+    };
+    function afterStartTerm() {
+        try {
+            if (document.querySelectorAll(".xterm-screen").length == 0) {
+                var e = new Event('keydown');
+                e.ctrlKey=true;
+                e.keyCode= 192;
+                document.dispatchEvent(e);
+            }
+        } catch(error) {
+            // todo
+        }
+    };
+    
+    function toggleMenuBar() {
+        var mainPanel = document.getElementById('theia-left-right-split-panel');
+        if(mainPanel.style.top == '0px') {
+            mainPanel.style.top = '32px';
+            var newHeight = parseInt(mainPanel.style.height,10)-32
+            mainPanel.style.height = newHeight + "px";
+        } else {
+            mainPanel.style.top = '0px';
+            var newHeight = parseInt(mainPanel.style.height,10)+32
+            mainPanel.style.height = newHeight + "px";
+        }
+        //redesign with new height
+        document.querySelectorAll('div.hasCommand[title="Toggle Bottom Panel"]')[0].click();
+        document.querySelectorAll('div.hasCommand[title="Toggle Bottom Panel"]')[0].click();
+    };
+
+    function switchTermEditor() {
+        if ( document.querySelectorAll('div.terminal-container:not(.p-mod-hidden) textarea.xterm-helper-textarea').length > 0){
+            var term = document.querySelectorAll('div.terminal-container:not(.p-mod-hidden) textarea.xterm-helper-textarea')[0];
+            if (document.querySelectorAll('#theia-main-content-panel div.showUnused:not(.p-mod-hidden) textarea').length > 0) {
+                var editor = document.querySelectorAll('#theia-main-content-panel div.showUnused:not(.p-mod-hidden) textarea')[0];
+                if (document.activeElement == term) {
+                    editor.focus();
+                } else {
+                    term.focus();
+                }
+            };
+        };
+
+    }
+    function doc_keyUp(e) {
+        // ctrl+f1 toogle menu
+        if (e.ctrlKey && e.keyCode == 112) {
+            toggleMenuBar();
+            e.stopPropagation();
+        };
+        // ctrl+f2 switch editor/terminal
+        if (e.ctrlKey && e.keyCode == 113) {
+            switchTermEditor();
+            e.stopPropagation();
+        };
+    }
+    // register the handler 
+    document.addEventListener('keyup', doc_keyUp, false);
+    setTimeout(() => { afterStartToggle(); }, 1000);
+  </script>
+</body>
+
+</html>

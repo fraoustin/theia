@@ -1,0 +1,41 @@
+.hidden {
+    display: none !important;
+}
+
+
+#footer {
+    margin: auto;
+    bottom: 20px;
+    right: 5%;
+    position: fixed;
+    width: 90%;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    border-top: 1px solid gray;
+}
+
+@font-face{
+    font-family:icomoonlogin;
+    src:url(./icomoonlogin.woff) format('woff');
+    font-weight:400;
+    font-style:normal
+}
+
+.icon-user:before {
+    font-family: 'icomoonlogin';
+    position: relative;
+    left: -5px;
+    content: "\e971";
+}
+
+.icon-password:before {
+    font-family: 'icomoonlogin';
+    position: relative;
+    left: -5px;
+    content: "\e98d";
+}
+
+a {
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+}

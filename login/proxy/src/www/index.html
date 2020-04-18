@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Todotxt">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>Theia Ide</title>
+        
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="./android-desktop.png">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="WebDav">
+        <link rel="apple-touch-icon-precomposed" href="./ios-desktop.png">
+
+        <link rel="shortcut icon" href="./favicon.png">
+        <link rel="stylesheet" href="./login.css">
+        <link rel="stylesheet" href="./siimple.min.css">
+ 
+    </head>
+
+    <body>
+        
+        <div class="siimple-content siimple-content--extra-small">
+            <div class="siimple--px-5 siimple--py-5">
+                <div class="siimple-h2 siimple--text-normal siimple--mb-1" align="center">
+                    Theia Ide
+                </div>
+                <div class="siimple-field">
+                    <div class="siimple-field-label icon-user">Your login</div>
+                    <input id="user" class="siimple-input siimple-input--fluid" placeholder="you">
+                </div>
+                <div class="siimple-field">
+                    <div class="siimple-field-label icon-password">Your password</div>
+                    <input id="password" type="password" class="siimple-input siimple-input--fluid" placeholder="password">
+                </div>
+                <div id="error" class="siimple-tip siimple-tip--error siimple-tip--exclamation  siimple--color-error siimple--bg-white hidden">
+                    User or Password is wrong
+                </div>
+                <div class="siimple-field">
+                    <div class="siimple-btn siimple-btn--primary siimple-btn--fluid siimple--text-bold" onclick="validForm()">
+                        Login
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="siimple-footer" align="center">
+            by <a href="https://github.com/fraoustin/theia">Theia Ide</a>
+        </div>
+        <script src="/login.js"></script>
+    </body>
+</html>

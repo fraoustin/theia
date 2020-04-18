@@ -1,0 +1,12 @@
+{
+    "workbench.iconTheme": "theia-file-icons",
+    "workbench.colorTheme": "Atom Light",
+    "docker-explorer.showAzureRegistries": false,
+    "docker-explorer.showDockerHubTreeView": false,
+    "docker-explorer.showSuggestedDockerImages": false,
+    "docker-explorer.showDockerImages": true,
+    "docker-explorer.showDockerContainers": true,
+    "editor.fontFamily": "'JetBrainsMono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "'JetBrainsMono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.minimap.enabled": false
+}

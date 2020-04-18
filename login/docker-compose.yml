@@ -1,0 +1,21 @@
+version: '2'
+services:
+    proxy:
+        build:
+            context: proxy/.
+        ports:
+            - "80:80"
+        environment:
+            - SET_CONTAINER_TIMEZONE=true
+            - CONTAINER_TIMEZONE=Europe/Paris
+            - THEIAUSER=user
+            - THEIAPASSWORD=pass
+        depends_on:
+            - theia
+        restart: always
+    theia:
+        image: theia
+        volumes:
+            - /home/fraoustin/Downloads/tmp/project:/project
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: always

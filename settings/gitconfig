@@ -1,0 +1,29 @@
+[http]
+[color]
+	ui = true
+[alias]
+	graph = log --graph --abbrev-commit --pretty='%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date=short
+	graphall = log --graph --abbrev-commit --pretty='%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date=short --all
+	logall = log --graph --pretty='%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date=short --abbrev-commit --decorate --all
+	history = log --graph --pretty='%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date=short --abbrev-commit --decorate
+    changes = diff --name-status
+    sync = !git fetch && git rebase
+    undo = git reset --soft HEAD^
+    amend = commit --amend
+	fixup = !sh -c 'SHA=$(git rev-parse $1) \
+        && git commit --fixup $SHA \
+        && git rebase -i --autosquash $SHA~' -
+	# Utilisation : git fixup {sha1}	
+    fetchandreset = !BRANCH=$(git rev-parse --abbrev-ref HEAD) \
+        && git fetch origin $BRANCH \
+        && git reset --hard origin/$BRANCH
+	# Utilisation : git fetchandreset
+[core]
+	editor = vim
+[log]
+	abbrevCommit = true
+[user]
+	name = myname
+	email = myem@il.com
+[push]
+	default = simple
