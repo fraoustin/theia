@@ -14,9 +14,9 @@ I add
 - extension docker-explorer
 - extension theme Atom
 - extension colorize
-- shortcut crtl+f1 for toggle menu
-- shortcut crtl+f2: switch between editor and terminal
-- shortcut crtl+left or right: switch between tab
+- shortcut ctrl+f1 or ctrl+m: toggle menu
+- shortcut ctrl+f2 or ctrl+i: switch between editor and terminal
+- shortcut ctrl+left or right: switch between tab
 - JetBrainsMono as font in theia
 
 
@@ -40,6 +40,7 @@ user default is *user* and password default is *pass* (you can change in docker-
 
 you use http://localhost/ for access login ihm
 
+you can use shortcut ctrl+q for to quit or menu disconnect
 
 ## External library
 

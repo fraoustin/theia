@@ -31,14 +31,71 @@
 <body>
   <div ></div>
   <script>
+
+    function setCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    function eraseCookie(name) {   
+        document.cookie = name+'=; Max-Age=-99999999;';  
+    }
+
     function afterStartToggle() {
         try {
             toggleMenuBar();
-            setTimeout(() => { afterStartTerm(); }, 1000);
+            setTimeout(() => { afterStartTerm(); addDisconnectMenuBar();}, 1000);
         } catch(error) {
             setTimeout(() => { afterStartToggle(); }, 1000);
         };
     };
+
+    function htmlToElement(html) {
+        var template = document.createElement('template');
+        html = html.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = html;
+        return template.content.firstChild;
+    };
+
+    var templateButtonDisconnect=`<li class="p-MenuBar-item" onclick="disconnectAction()"><div class="p-MenuBar-itemIcon"></div><div class="p-MenuBar-itemLabel">Disconnect</div></li>`
+
+    function addDisconnectMenuBar() {
+        if (getCookie('theiaLogin') == 'ko'){
+            var menuBar = document.querySelectorAll("#theia-top-panel .p-MenuBar-content")[0];
+            menuBar.appendChild(htmlToElement(templateButtonDisconnect));
+        }
+    }
+
+    function disconnectAction() {
+        setCookie("theiaLogin","ko")
+        var xmlhttp = new XMLHttpRequest();
+        url = window.location.protocol + '//' + window.location.host+window.location.pathname;
+        urllogin = url.substring(0, url.indexOf('/theia'))
+        xmlhttp.open("GET", url.replace(/:\/\//, '://user:nopassword@'), true);
+        xmlhttp.onreadystatechange=function() 
+        {
+            if(xmlhttp.readyState==4){
+            window.location.href = urllogin;
+            }
+        }
+        xmlhttp.send();
+    }
+
     function afterStartTerm() {
         try {
             if (document.querySelectorAll(".xterm-screen").length == 0) {
@@ -83,14 +140,19 @@
 
     }
     function doc_keyUp(e) {
-        // ctrl+f1 toogle menu
-        if (e.ctrlKey && e.keyCode == 112) {
+        // ctrl+f1 or ctrl+m  toogle menu
+        if (e.ctrlKey && (e.keyCode == 112 || e.keyCode == 77)) {
             toggleMenuBar();
             e.stopPropagation();
         };
-        // ctrl+f2 switch editor/terminal
-        if (e.ctrlKey && e.keyCode == 113) {
+        // ctrl+f2 or ctrl+i switch editor/terminal
+        if (e.ctrlKey && ( e.keyCode == 113 || e.keyCode == 73)) {
             switchTermEditor();
+            e.stopPropagation();
+        };
+        // ctrl+q disconnect
+        if (e.ctrlKey && e.keyCode == 81) {
+            disconnectAction();
             e.stopPropagation();
         };
     }
@@ -100,4 +162,3 @@
   </script>
 </body>
 
-</html>

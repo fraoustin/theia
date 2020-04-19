@@ -6,11 +6,18 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y python-dev python-pip \
     && pip install --upgrade pip \
-    && pip install colorconsole
+    && pip install colorconsole \
+    && apt -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
 # Install Python 3 from source
 ARG PYTHON_VERSION=3.8.2
-RUN apt-get install -y make build-essential libssl-dev \
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y make build-essential libssl-dev \
     && apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
     && apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev \
     && wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
@@ -20,7 +27,12 @@ RUN apt-get install -y make build-essential libssl-dev \
     && ./configure \
     && make -j8 \
     && make install \
-    && update-alternatives --install /usr/bin/python python /usr/local/bin/python3 1
+    && update-alternatives --install /usr/bin/python python /usr/local/bin/python3 1 \
+    && apt -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
 RUN pip3 install --upgrade pip \
     && pip3 install python-language-server flake8 autopep8 flask colorconsole pylint
@@ -40,7 +52,12 @@ RUN apt-get update \
     && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs)  stable" \
     && apt-get update \
-    && apt-get install docker-ce-cli
+    && apt-get install docker-ce-cli \
+    && apt -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
 # update git
 ARG GIT_VERSION=2.26.0
@@ -48,7 +65,12 @@ RUN apt-get remove -y git \
     && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev \
-    && apt-get install -y make
+    && apt-get install -y make \
+    && apt -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
 RUN wget https://www.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz \
     && mv git-${GIT_VERSION}.tar.gz /opt \
@@ -78,7 +100,17 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
     yarn theia download:plugins
 
 # add extension
-COPY ./extensions/* /home/theia/plugins/
+RUN mkdir /home/theia/plugins/vscode-builtin-theme-atomlight
+COPY ./extensions/vscode-builtin-theme-atomlight/* /home/theia/plugins/vscode-builtin-theme-atomlight/
+RUN mkdir /home/theia/plugins/vscode-colorize
+COPY ./extensions/vscode-colorize/* /home/theia/plugins/vscode-colorize/
+RUN mkdir /home/theia/plugins/vscode-docker-explorer
+COPY ./extensions/vscode-docker-explorer/* /home/theia/plugins/vscode-docker-explorer/
+
+# change icon docker explorer
+COPY img/container-off.png /home/theia/plugins/vscode-docker-explorer/extension/resources/container-off.png
+COPY img/container-on.png /home/theia/plugins/vscode-docker-explorer/extension/resources/container-on.png
+COPY img/image.png /home/theia/plugins/vscode-docker-explorer/extension/resources/image.png
 
 # configuration Theia
 COPY settings/settings.json /root/.theia/settings.json
@@ -90,11 +122,6 @@ COPY www/index.html /home/theia/lib/index.html
 COPY img/theia.png /home/theia/lib/theia.png
 COPY img/git.png /home/theia/lib/git.png
 COPY img/debug.png /home/theia/lib/debug.png
-
-# change icon docker explorer
-COPY img/container-off.png /home/theia/plugins/vscode-docker-explorer/extension/resources/container-off.png
-COPY img/container-on.png /home/theia/plugins/vscode-docker-explorer/extension/resources/container-on.png
-COPY img/image.png /home/theia/plugins/vscode-docker-explorer/extension/resources/image.png
 
 # clean
 RUN apt-get -y remove python3 python3.5 \
@@ -112,7 +139,7 @@ ENV SHELL=/bin/bash \
 ENTRYPOINT [ "yarn", "theia", "start", "--hostname=0.0.0.0" ]
 #ENTRYPOINT [ "yarn", "theia", "start", "/project", "--hostname=0.0.0.0" ]
 
-# miss:
-# add visuel login
+# todo
+# add button disconnect and crtl+q
 # create un electron qu'avec theia
 # optimize size of img
