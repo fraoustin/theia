@@ -59,7 +59,7 @@
     function afterStartToggle() {
         try {
             toggleMenuBar();
-            setTimeout(() => { afterStartTerm(); addDisconnectMenuBar();}, 1000);
+            setTimeout(() => { afterStartTerm(); addDisconnectMenuBar();}, 2000);
         } catch(error) {
             setTimeout(() => { afterStartToggle(); }, 1000);
         };
@@ -75,7 +75,7 @@
     var templateButtonDisconnect=`<li class="p-MenuBar-item" onclick="disconnectAction()"><div class="p-MenuBar-itemIcon"></div><div class="p-MenuBar-itemLabel">Disconnect</div></li>`
 
     function addDisconnectMenuBar() {
-        if (getCookie('theiaLogin') == 'ko'){
+        if (getCookie('theiaLogin') == 'ok'){
             var menuBar = document.querySelectorAll("#theia-top-panel .p-MenuBar-content")[0];
             menuBar.appendChild(htmlToElement(templateButtonDisconnect));
         }
