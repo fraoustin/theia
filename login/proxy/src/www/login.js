@@ -79,3 +79,6 @@ passwordInput.addEventListener("keydown", function (e) {
     }
   };
 });
+
+
+setCookie("theiaLogin","ko");

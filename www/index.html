@@ -59,7 +59,7 @@
     function afterStartToggle() {
         try {
             toggleMenuBar();
-            setTimeout(() => { afterStartTerm(); addDisconnectMenuBar();}, 2000);
+            setTimeout(() => { afterStartTerm(); addDisconnectMenuBar();}, 1000);
         } catch(error) {
             setTimeout(() => { afterStartToggle(); }, 1000);
         };
@@ -75,7 +75,7 @@
     var templateButtonDisconnect=`<li class="p-MenuBar-item" onclick="disconnectAction()"><div class="p-MenuBar-itemIcon"></div><div class="p-MenuBar-itemLabel">Disconnect</div></li>`
 
     function addDisconnectMenuBar() {
-        if (getCookie('theiaLogin') == 'ok'){
+        if (getCookie('theiaLogin') != null){
             var menuBar = document.querySelectorAll("#theia-top-panel .p-MenuBar-content")[0];
             menuBar.appendChild(htmlToElement(templateButtonDisconnect));
         }
@@ -108,21 +108,25 @@
             // todo
         }
     };
-    
+
     function toggleMenuBar() {
-        var mainPanel = document.getElementById('theia-left-right-split-panel');
-        if(mainPanel.style.top == '0px') {
-            mainPanel.style.top = '32px';
-            var newHeight = parseInt(mainPanel.style.height,10)-32
-            mainPanel.style.height = newHeight + "px";
+        if (document.querySelectorAll('div.hasCommand[title="Toggle Bottom Panel"]').length > 0){
+            var mainPanel = document.getElementById('theia-left-right-split-panel');
+            if(mainPanel.style.top == '0px') {
+                mainPanel.style.top = '32px';
+                var newHeight = parseInt(mainPanel.style.height,10)-32
+                mainPanel.style.height = newHeight + "px";
+            } else {
+                mainPanel.style.top = '0px';
+                var newHeight = parseInt(mainPanel.style.height,10)+32
+                mainPanel.style.height = newHeight + "px";
+            }
+            //redesign with new height
+            document.querySelectorAll('div.hasCommand[title="Toggle Bottom Panel"]')[0].click();
+            document.querySelectorAll('div.hasCommand[title="Toggle Bottom Panel"]')[0].click();
         } else {
-            mainPanel.style.top = '0px';
-            var newHeight = parseInt(mainPanel.style.height,10)+32
-            mainPanel.style.height = newHeight + "px";
-        }
-        //redesign with new height
-        document.querySelectorAll('div.hasCommand[title="Toggle Bottom Panel"]')[0].click();
-        document.querySelectorAll('div.hasCommand[title="Toggle Bottom Panel"]')[0].click();
+            throw "not toggle bottom panel";
+        };
     };
 
     function switchTermEditor() {
