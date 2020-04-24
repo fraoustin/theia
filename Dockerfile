@@ -35,7 +35,7 @@ RUN apt-get update \
     && rm -rf /tmp/*
 
 RUN pip3 install --upgrade pip \
-    && pip3 install python-language-server flake8 autopep8 flask colorconsole pylint
+    && pip3 install python-language-server flake8 autopep8 flask colorconsole pylint requests httpie
 
 # install  pythonrc and PYTHONSTARTUP
 COPY settings/bashrc /root/.bashrc
