@@ -6,5 +6,9 @@
     {
         "command": "core.previousTab",
         "keybinding": "ctrl+left"
+    },
+    {
+        "command": "python.execInTerminal",
+        "keybinding": "f6"
     }
 ]

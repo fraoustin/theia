@@ -1,5 +1,4 @@
-ARG NODE_VERSION=10
-FROM node:${NODE_VERSION}
+FROM theiaide/theia-python:1.0.0
 
 # end install Python 2
 RUN apt-get update \
@@ -86,20 +85,7 @@ RUN wget https://www.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz \
 # install  gitconfig
 COPY settings/gitconfig /root/.gitconfig
 
-
-# install theia
-RUN mkdir -p /home/theia \
-    && mkdir -p /project
-WORKDIR /home/theia
-
-ARG version=latest
-ADD $version.package.json ./package.json
-ARG GITHUB_TOKEN
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
-     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build ; \
-    yarn theia download:plugins
-
-# add extension
+# add extension theia
 RUN mkdir /home/theia/plugins/vscode-builtin-theme-atomlight
 COPY ./extensions/vscode-builtin-theme-atomlight/* /home/theia/plugins/vscode-builtin-theme-atomlight/
 RUN mkdir /home/theia/plugins/vscode-colorize
@@ -136,10 +122,4 @@ VOLUME ["/project",]
 
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
-ENTRYPOINT [ "yarn", "theia", "start", "--hostname=0.0.0.0" ]
-#ENTRYPOINT [ "yarn", "theia", "start", "/project", "--hostname=0.0.0.0" ]
-
-# todo
-# add button disconnect and crtl+q
-# create un electron qu'avec theia
-# optimize size of img
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]

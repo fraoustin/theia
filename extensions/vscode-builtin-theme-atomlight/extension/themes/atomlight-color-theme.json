@@ -190,7 +190,7 @@
 			"name": "Punctuation",
 			"scope": "punctuation",
 			"settings": {
-				"foreground": "#50a14f"
+				"foreground": "#0184BC" //"#50a14f"
 			}
 		},
 		{
