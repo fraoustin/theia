@@ -96,9 +96,9 @@ RUN mkdir /home/theia/plugins/vscode-docker-explorer
 COPY ./extensions/vscode-docker-explorer/* /home/theia/plugins/vscode-docker-explorer/
 
 # change icon docker explorer
-COPY img/container-off.png /home/theia/plugins/vscode-docker-explorer/extension/resources/container-off.png
-COPY img/container-on.png /home/theia/plugins/vscode-docker-explorer/extension/resources/container-on.png
-COPY img/image.png /home/theia/plugins/vscode-docker-explorer/extension/resources/image.png
+COPY img/container-off.png /home/theia/plugins/vscode-docker-explorer/resources/container-off.png
+COPY img/container-on.png /home/theia/plugins/vscode-docker-explorer/resources/container-on.png
+COPY img/image.png /home/theia/plugins/vscode-docker-explorer/resources/image.png
 
 # configuration Theia
 COPY settings/settings.json /root/.theia/settings.json
