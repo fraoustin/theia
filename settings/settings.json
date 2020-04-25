@@ -6,7 +6,7 @@
     "docker-explorer.showSuggestedDockerImages": false,
     "docker-explorer.showDockerImages": true,
     "docker-explorer.showDockerContainers": true,
-    "editor.fontFamily": "'JetBrainsMono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "terminal.integrated.fontFamily": "'JetBrainsMono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'Cascadia Mono', 'JetBrainsMono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "'Cascadia Mono', 'JetBrainsMono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.minimap.enabled": false
 }

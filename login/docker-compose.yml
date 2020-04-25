@@ -16,6 +16,6 @@ services:
     theia:
         image: theia
         volumes:
-            - /home/fraoustin/Downloads/tmp/project:/project
+            - /home/fraoustin/Downloads:/home/project
             - /var/run/docker.sock:/var/run/docker.sock
         restart: always
