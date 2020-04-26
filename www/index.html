@@ -80,11 +80,14 @@
     };
 
     var templateButtonDisconnect=`<li class="p-MenuBar-item" onclick="disconnectAction()"><div class="p-MenuBar-itemIcon"></div><div class="p-MenuBar-itemLabel">Disconnect</div></li>`
+    var templateButtonToogleMenu=`<div class="element" title="Toggle Menu" onclick="toggleMenuBar()"><span class="fa fa-window-restore"></span></div>`
 
     function addDisconnectMenuBar() {
         if (getCookie('theiaLogin') != null){
             var menuBar = document.querySelectorAll("#theia-top-panel .p-MenuBar-content")[0];
             menuBar.appendChild(htmlToElement(templateButtonDisconnect));
+            var statusBar = document.querySelectorAll('#theia-statusBar .area.right')[0];
+            statusBar.appendChild(htmlToElement(templateButtonToogleMenu))
         }
     }
 
