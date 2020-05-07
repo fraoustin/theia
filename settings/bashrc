@@ -28,3 +28,5 @@ alias ll='ls $LS_OPTIONS -lhtr'
 alias l='ls $LS_OPTIONS -lA'
 
 export PYTHONSTARTUP=$HOME/.pythonrc
+
+alias check='flake8 && python -m unittest discover tests'

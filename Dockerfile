@@ -1,4 +1,4 @@
-FROM theiaide/theia-python:1.0.0
+FROM theiaide/theia-python:1.1.0
 
 # end install Python 2
 RUN apt-get update \
@@ -86,6 +86,17 @@ RUN wget https://www.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz \
 
 # install  gitconfig
 COPY settings/gitconfig /root/.gitconfig
+
+# install vim
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y vim \
+    && apt -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
+
 
 # add extension theia
 RUN mkdir /home/theia/plugins/vscode-builtin-theme-atomlight
