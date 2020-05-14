@@ -1,3 +1,4 @@
+# FROM theia-python-docker https://github.com/theia-ide/theia-apps/blob/master/theia-python-docker/Dockerfile
 ARG NODE_VERSION=10-buster
 FROM node:${NODE_VERSION}
 
@@ -30,13 +31,13 @@ RUN mkdir -p /home/theia \
     && mkdir -p /home/project
 WORKDIR /home/theia
 
-ARG version=latest
-ADD $version.package.json ./package.json
+RUN wget https://raw.githubusercontent.com/theia-ide/theia-apps/master/theia-python-docker/latest.package.json
 ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
      NODE_OPTIONS="--max_old_space_size=4096" yarn theia build ; \
     yarn theia download:plugins
 
+# END theia-python-docker
 
 # end install Python 2
 RUN apt-get update \
