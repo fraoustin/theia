@@ -32,6 +32,7 @@ RUN mkdir -p /home/theia \
 WORKDIR /home/theia
 
 RUN wget https://raw.githubusercontent.com/theia-ide/theia-apps/master/theia-python-docker/latest.package.json
+RUN mv latest.package.json package.json
 ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
      NODE_OPTIONS="--max_old_space_size=4096" yarn theia build ; \
