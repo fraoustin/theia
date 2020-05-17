@@ -172,8 +172,10 @@ RUN apt-get -y remove python3 python3.5 \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* 
 
+RUN mkdir -p /root/projects
+
 EXPOSE 3000
-VOLUME ["/project",]
+VOLUME ["/root/projects", ]
 
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
