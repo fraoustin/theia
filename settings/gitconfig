@@ -2,6 +2,7 @@
 [color]
 	ui = true
 [alias]
+	tags = show-ref --abbrev=7 --tags
 	graph = log --graph --abbrev-commit --pretty='%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date=short
 	graphall = log --graph --abbrev-commit --pretty='%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date=short --all
 	logall = log --graph --pretty='%Cred%h %Cgreen%ad %Cblue%an %Creset%s' --date=short --abbrev-commit --decorate --all

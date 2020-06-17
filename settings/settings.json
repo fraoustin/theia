@@ -1,7 +1,7 @@
 {
     "workbench.iconTheme": "theia-file-icons",
     "workbench.colorTheme": "Atom Light",
-    "workbench.editor.enablePreview": false,
+    "editor.enablePreview": false,
     "docker-explorer.showAzureRegistries": false,
     "docker-explorer.showDockerHubTreeView": false,
     "docker-explorer.showSuggestedDockerImages": false,
