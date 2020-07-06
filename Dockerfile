@@ -53,7 +53,7 @@ RUN apt-get update \
     && rm -rf /tmp/*
 
 # Install Python 3 from source
-ARG PYTHON_VERSION=3.8.4
+ARG PYTHON_VERSION=3.8.3
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y make build-essential libssl-dev \
