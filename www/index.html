@@ -63,6 +63,20 @@
         document.cookie = name+'=; Max-Age=-99999999;';  
     }
 
+    function afterStartToggle() {
+        var n = 0;
+        while (n < 10) {
+            try {
+                toggleMenuBar();
+                afterStartTerm();
+                addDisconnectMenuBar();
+                n = 11;
+            } catch(error) {
+                n = n +1 n+1;
+            };
+        }
+    };
+
     function htmlToElement(html) {
         var template = document.createElement('template');
         html = html.trim(); // Never return a text node of whitespace as the result
@@ -163,7 +177,7 @@
     }
     // register the handler 
     document.addEventListener('keyup', doc_keyUp, false);
-    setTimeout(() => { afterStartTerm(); addDisconnectMenuBar();}, 1000);
+    setTimeout(() => { afterStartToggle(); }, 1000);
   </script>
 </body>
 
