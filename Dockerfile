@@ -88,7 +88,7 @@ ARG GIT_VERSION=2.28.0
 RUN apt-get remove -y git \
     && apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev \
+    && apt-get install -y dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev less \
     && apt-get install -y make \
     && apt -y autoremove \
     && apt-get clean \
