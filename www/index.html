@@ -64,17 +64,13 @@
     }
 
     function afterStartToggle() {
-        var n = 0;
-        while (n < 10) {
-            try {
-                toggleMenuBar();
-                afterStartTerm();
-                addDisconnectMenuBar();
-                n = 11;
-            } catch(error) {
-                n = n +1 n+1;
-            };
-        }
+        try {
+            //toggleMenuBar();
+            afterStartTerm();
+            addDisconnectMenuBar();
+        } catch(error) {
+            setTimeout(() => { afterStartToggle(); }, 1000);
+        };
     };
 
     function htmlToElement(html) {
@@ -89,10 +85,10 @@
 
     function addDisconnectMenuBar() {
         if (getCookie('theiaLogin') != null){
-            var menuBar = document.querySelectorAll("#theia-top-panel .p-MenuBar-content")[0];
-            menuBar.appendChild(htmlToElement(templateButtonDisconnect));
             var statusBar = document.querySelectorAll('#theia-statusBar .area.right')[0];
             statusBar.appendChild(htmlToElement(templateButtonToogleMenu))
+            var menuBar = document.querySelectorAll("#theia-top-panel .p-MenuBar-content")[0];
+            menuBar.appendChild(htmlToElement(templateButtonDisconnect));
         }
     }
 
