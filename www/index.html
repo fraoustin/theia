@@ -63,15 +63,6 @@
         document.cookie = name+'=; Max-Age=-99999999;';  
     }
 
-    function afterStartToggle() {
-        try {
-            toggleMenuBar();
-            setTimeout(() => { afterStartTerm(); addDisconnectMenuBar();}, 1000);
-        } catch(error) {
-            setTimeout(() => { afterStartToggle(); }, 1000);
-        };
-    };
-
     function htmlToElement(html) {
         var template = document.createElement('template');
         html = html.trim(); // Never return a text node of whitespace as the result
@@ -172,7 +163,6 @@
     }
     // register the handler 
     document.addEventListener('keyup', doc_keyUp, false);
-    setTimeout(() => { afterStartToggle(); }, 1000);
   </script>
 </body>
 
