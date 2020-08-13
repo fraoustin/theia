@@ -140,8 +140,8 @@ COPY settings/keymaps.json /root/.theia/keymaps.json
 
 #font and icon
 COPY www/JetBrainsMono-Regular.woff2 /home/theia/lib/JetBrainsMono-Regular.woff2
-COPY www/CascadiaMono.ttf /home/theia/lib/CascadiaMono.ttf
-COPY www/cascadiamono-webfont.woff2 /home/theia/lib/cascadiamono-webfont.woff2
+#COPY www/CascadiaMono.ttf /home/theia/lib/CascadiaMono.ttf
+#COPY www/cascadiamono-webfont.woff2 /home/theia/lib/cascadiamono-webfont.woff2
 COPY www/index.html /home/theia/lib/index.html
 COPY img/theia.png /home/theia/lib/theia.png
 COPY img/git.png /home/theia/lib/git.png
