@@ -1,5 +1,5 @@
 # FROM theia-python-docker https://github.com/theia-ide/theia-apps/blob/master/theia-python-docker/Dockerfile
-ARG NODE_VERSION=10-buster
+ARG NODE_VERSION=12.18.3-buster
 FROM node:${NODE_VERSION}
 
 # Install Python 3 from source
