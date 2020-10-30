@@ -144,8 +144,8 @@ COPY www/JetBrainsMono-Regular.woff2 /home/theia/lib/JetBrainsMono-Regular.woff2
 #COPY www/cascadiamono-webfont.woff2 /home/theia/lib/cascadiamono-webfont.woff2
 COPY www/index.html /home/theia/lib/index.html
 COPY img/theia.png /home/theia/lib/theia.png
-COPY img/git.png /home/theia/lib/git.png
-COPY img/debug.png /home/theia/lib/debug.png
+#COPY img/git.png /home/theia/lib/git.png
+#COPY img/debug.png /home/theia/lib/debug.png
 
 # clean
 RUN apt-get -y remove python3 python3.5 \
