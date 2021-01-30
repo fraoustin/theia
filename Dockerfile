@@ -84,7 +84,7 @@ RUN apt-get update \
     && rm -rf /tmp/*
 
 # update git
-ARG GIT_VERSION=2.28.0
+ARG GIT_VERSION=2.29.2
 RUN apt-get remove -y git \
     && apt-get update \
     && apt-get upgrade -y \
