@@ -7,6 +7,7 @@ ARG VERSION=3.8.3
 
 RUN apt-get update \
     && apt-get upgrade -y \
+    && apt-get install -y libsecret-1-dev libsecret-1-0 \
     && apt-get install -y make build-essential libssl-dev \
     && apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
     && apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev \
@@ -73,18 +74,18 @@ RUN apt-get update \
         curl \
         gnupg-agent \
         software-properties-common \
-    && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs)  stable" \
+    && curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
     && apt-get update \
-    && apt-get install docker-ce-cli \
+    && apt-get -y install docker-ce-cli \
     && apt -y autoremove \
-    && apt-get clean \
+    && apt-get -y clean \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/*
 
 # update git
-ARG GIT_VERSION=2.29.2
+ARG GIT_VERSION=2.34.1
 RUN apt-get remove -y git \
     && apt-get update \
     && apt-get upgrade -y \
